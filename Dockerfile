@@ -50,5 +50,8 @@ RUN chmod +x /etc/service/nginx/run
 
 ADD ./ssh/id_rsa.pub /home/sam/.ssh/authorized_keys
 RUN chown -R sam:sam ~sam
+
+RUN apt-get install -y -q tmux
+
 EXPOSE 22 6000 80
 CMD /usr/bin/runsvdir -P /etc/service
