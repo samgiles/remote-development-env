@@ -1,0 +1,21 @@
+#!/bin/sh
+
+ufw default deny incoming
+ufw default allow outgoing
+
+ufw allow 22/tcp
+ufw allow 2222/tcp
+ufw allow 80/tcp
+
+ufw enable
+
+apt-get install git
+mkdir /opt/src
+cd /opt/src
+
+git clone https://github.com/samgiles/remote-development-env
+cd remote-development-env
+
+cp ~root/.ssh/authorized_keys ./ssh/id_rsa.pub
+docker build -t dev-server .
+

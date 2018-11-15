@@ -42,9 +42,6 @@ RUN mkdir ~sam/.ssh
 COPY config/nginx.conf /etc/nginx/sites-enabled/default
 RUN echo 'username ALL=NOPASSWD: ALL' >> /etc/sudoers
 
-COPY start.sh /usr/bin/start.sh
-RUN chmod +x /usr/bin/start.sh
-
 ADD config/runit/sshd /etc/service/sshd/run
 RUN chmod +x /etc/service/sshd/run
 
@@ -52,6 +49,5 @@ ADD config/runit/nginx /etc/service/nginx/run
 RUN chmod +x /etc/service/nginx/run
 
 ADD ./ssh/id_rsa.pub /home/sam/.ssh/authorized_keys
-# CMD /usr/bin/start.sh
 CMD /usr/bin/runsvdir -P /etc/service
 EXPOSE 22 6000 80
