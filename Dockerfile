@@ -49,5 +49,6 @@ ADD config/runit/nginx /etc/service/nginx/run
 RUN chmod +x /etc/service/nginx/run
 
 ADD ./ssh/id_rsa.pub /home/sam/.ssh/authorized_keys
-CMD /usr/bin/runsvdir -P /etc/service
+RUN chown -R sam:sam ~sam
 EXPOSE 22 6000 80
+CMD /usr/bin/runsvdir -P /etc/service
