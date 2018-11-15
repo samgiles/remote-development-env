@@ -17,5 +17,7 @@ git clone https://github.com/samgiles/remote-development-env
 cd remote-development-env
 
 cp ~root/.ssh/authorized_keys ./ssh/id_rsa.pub
-docker build -t dev-server .
 
+echo "Building dev-server image"
+docker build -t dev-server .
+docker run -d --init --privileged --tty -p 0.0.0.0:2222:22 -p 0.0.0.0:80:80 -t dev-server
